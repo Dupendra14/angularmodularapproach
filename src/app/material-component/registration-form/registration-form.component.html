@@ -1,0 +1,43 @@
+<mat-card>
+    <form class="example-container" [formGroup]="registration">
+        <mat-card-content>
+            <mat-card-title>
+                <p class="pb-2">Registration Form</p>
+            </mat-card-title>
+            <mat-card-subtitle><button mat-raised-button color="primary" (click)="addForm()">Add Form</button>
+            </mat-card-subtitle>
+
+            <mat-accordion formArrayName="arr" *ngFor="let a of registration.get('arr').controls; let i = index">
+                <div class="accordian">
+                    <mat-expansion-panel [formGroupName]="i">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title> Personal Data Form {{i+1}} </mat-panel-title>
+                            <mat-panel-description> Personal Details </mat-panel-description>
+                            <mat-icon> cancel_presentation</mat-icon>
+                        </mat-expansion-panel-header>
+                        <mat-form-field>
+                            <input matInput placeholder="First name" formControlName="name" required> </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="age" formControlName="age" required> </mat-form-field>
+                        <mat-radio-group aria-label="Select an option" formControlName="gender" required>
+                            <mat-radio-button value="1">Male</mat-radio-button>
+                            <mat-radio-button value="2">Female</mat-radio-button>
+                        </mat-radio-group>
+                        <mat-form-field>
+                            <mat-label>Select State</mat-label>
+                            <mat-select formControlName="state" required>
+                                <mat-option>None</mat-option>
+                                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-checkbox formControlName="tnd" required>Agree with tearms and conditions</mat-checkbox>
+                    </mat-expansion-panel>
+                </div>
+            </mat-accordion>
+
+        </mat-card-content>
+        <div class="example-button-row">
+            <button mat-raised-button color="warn" type="submit" (click)="saveAllForm()">Save</button>
+        </div>
+    </form>
+</mat-card>
